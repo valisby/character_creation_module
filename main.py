@@ -2,6 +2,12 @@ from random import randint
 
 
 def attack(char_name: str, char_class: str) -> str:
+    """
+    Функция для атаки персонажем в зависимости от его класса.
+    :param char_name: Имя персонажа.
+    :param char_class: Класс персонажа.
+    :return: Строка с результатом атаки.
+    """
     if char_class == 'warrior':
         return (f'{char_name} нанёс урон противнику '
                 'равный {5 + randint(3, 5)}')
@@ -11,18 +17,24 @@ def attack(char_name: str, char_class: str) -> str:
     if char_class == 'healer':
         return (f'{char_name} нанёс урон противнику равный '
                 f'{5 + randint(-3, -1)}')
+    return (f'{char_name} не может атаковать, так как его класс '
+            f'{char_class} не распознан.')
 
 
 def defence(char_name: str, char_class: str) -> str:
+
     if char_class == 'warrior':
         return (f'{char_name} блокировал {10 + randint(5, 10)} урона')
     if char_class == 'mage':
         return (f'{char_name} блокировал {10 + randint(-2, 2)} урона')
     if char_class == 'healer':
         return (f'{char_name} блокировал {10 + randint(2, 5)} урона')
+    return (f'{char_name} не может атаковать, так как его класс '
+            f'{char_class} не распознан.')
 
 
 def special(char_name: str, char_class: str) -> str:
+
     if char_class == 'warrior':
         return (f'{char_name} применил специальное умение '
                 f'«Выносливость {80 + 25}»')
@@ -31,9 +43,12 @@ def special(char_name: str, char_class: str) -> str:
     if char_class == 'healer':
         return (f'{char_name} применил специальное умение '
                 f'«Защита {10 + 30}»')
+    return (f'{char_name} не может атаковать, так как его класс '
+            f'{char_class} не распознан.')
 
 
 def start_training(char_name: str, char_class: str) -> str:
+
     if char_class == 'warrior':
         print(f'{char_name}, ты Воитель — отличный боец ближнего боя.')
     if char_class == 'mage':
@@ -58,6 +73,10 @@ def start_training(char_name: str, char_class: str) -> str:
 
 
 def choice_char_class() -> str:
+    """
+    Функция для выбора класса персонажа пользователем.
+    :return: Выбранный класс персонажа.
+    """
     approve_choice: str = ''
     char_class: str = ''
     while approve_choice != 'y':
@@ -80,6 +99,7 @@ def choice_char_class() -> str:
 
 
 def main() -> str:
+    """Главная функция для запуска игры."""
     print('Приветствую тебя, искатель приключений!')
     print('Прежде чем начать игру...')
     char_name: str = input('...назови себя: ')
@@ -89,6 +109,16 @@ def main() -> str:
     print('Воитель, Маг, Лекарь')
     char_class: str = choice_char_class()
     print(start_training(char_name, char_class))
+    if char_class == 'warrior':
+        return f'{char_name} использует свое специальное умение "Берсерк"!'
+    elif char_class == 'mage':
+        return (f'{char_name} использует свое специальное умение '
+                f'"Магический щит"!')
+    elif char_class == 'healer':
+        return f'{char_name} использует свое специальное умение "Лечение"!'
+    else:
+        return (f'{char_name} не может атаковать, так как его класс '
+                f'{char_class} не распознан.')
 
 
 main()
